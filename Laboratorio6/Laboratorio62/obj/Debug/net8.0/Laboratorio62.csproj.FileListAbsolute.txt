@@ -1,0 +1,15 @@
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\bin\Debug\net8.0\Laboratorio62.exe
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\bin\Debug\net8.0\Laboratorio62.deps.json
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\bin\Debug\net8.0\Laboratorio62.runtimeconfig.json
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\bin\Debug\net8.0\Laboratorio62.dll
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\bin\Debug\net8.0\Laboratorio62.pdb
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.AssemblyInfoInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.AssemblyInfo.cs
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.csproj.CoreCompileInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.sourcelink.json
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.dll
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\refint\Laboratorio62.dll
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.pdb
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\Laboratorio62.genruntimeconfig.cache
+C:\Users\liang\source\repos\ds4\Laboratorio6\Laboratorio62\obj\Debug\net8.0\ref\Laboratorio62.dll
