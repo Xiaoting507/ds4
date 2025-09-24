@@ -1,0 +1,15 @@
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.AssemblyInfoInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.AssemblyInfo.cs
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.csproj.CoreCompileInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.sourcelink.json
+C:\Users\liang\source\repos\ds4\Laboratorio54\bin\Debug\net8.0\Laboratorio54.exe
+C:\Users\liang\source\repos\ds4\Laboratorio54\bin\Debug\net8.0\Laboratorio54.deps.json
+C:\Users\liang\source\repos\ds4\Laboratorio54\bin\Debug\net8.0\Laboratorio54.runtimeconfig.json
+C:\Users\liang\source\repos\ds4\Laboratorio54\bin\Debug\net8.0\Laboratorio54.dll
+C:\Users\liang\source\repos\ds4\Laboratorio54\bin\Debug\net8.0\Laboratorio54.pdb
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.dll
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\refint\Laboratorio54.dll
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.pdb
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\Laboratorio54.genruntimeconfig.cache
+C:\Users\liang\source\repos\ds4\Laboratorio54\obj\Debug\net8.0\ref\Laboratorio54.dll
