@@ -3,6 +3,7 @@ C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\Laboratorio52.Ass
 C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\Laboratorio52.AssemblyInfo.cs
 C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\Laboratorio52.csproj.CoreCompileInputs.cache
 C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\Laboratorio52.sourcelink.json
+<<<<<<< HEAD
 C:\Users\liang\source\repos\ds4\Laboratorio52\bin\Debug\net8.0\Laboratorio52.exe
 C:\Users\liang\source\repos\ds4\Laboratorio52\bin\Debug\net8.0\Laboratorio52.deps.json
 C:\Users\liang\source\repos\ds4\Laboratorio52\bin\Debug\net8.0\Laboratorio52.runtimeconfig.json
@@ -13,3 +14,5 @@ C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\refint\Laboratori
 C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\Laboratorio52.pdb
 C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\Laboratorio52.genruntimeconfig.cache
 C:\Users\liang\source\repos\ds4\Laboratorio52\obj\Debug\net8.0\ref\Laboratorio52.dll
+=======
+>>>>>>> 52a29f0d163c06e83e9ce2517a57122a97a356bc
