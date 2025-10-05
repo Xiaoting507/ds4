@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Laboratorio10/1.0.0": {
+        "runtime": {
+          "Laboratorio10.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Laboratorio10/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
