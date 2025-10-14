@@ -1,0 +1,17 @@
+C:\Users\liang\source\repos\ds4\Laboratorio11\bin\Debug\net8.0-windows\Laboratorio11.exe
+C:\Users\liang\source\repos\ds4\Laboratorio11\bin\Debug\net8.0-windows\Laboratorio11.deps.json
+C:\Users\liang\source\repos\ds4\Laboratorio11\bin\Debug\net8.0-windows\Laboratorio11.runtimeconfig.json
+C:\Users\liang\source\repos\ds4\Laboratorio11\bin\Debug\net8.0-windows\Laboratorio11.dll
+C:\Users\liang\source\repos\ds4\Laboratorio11\bin\Debug\net8.0-windows\Laboratorio11.pdb
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.Form1.resources
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.csproj.GenerateResource.cache
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.AssemblyInfoInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.AssemblyInfo.cs
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.csproj.CoreCompileInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.sourcelink.json
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.dll
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\refint\Laboratorio11.dll
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.pdb
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\Laboratorio11.genruntimeconfig.cache
+C:\Users\liang\source\repos\ds4\Laboratorio11\obj\Debug\net8.0-windows\ref\Laboratorio11.dll

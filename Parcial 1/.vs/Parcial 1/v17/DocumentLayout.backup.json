@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8773BB-3A84-4968-AF98-5D602C4E367A}|Parcial 1.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 1\\matrizpatron.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8773BB-3A84-4968-AF98-5D602C4E367A}|Parcial 1.csproj|solutionrelative:matrizpatron.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8773BB-3A84-4968-AF98-5D602C4E367A}|Parcial 1.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8773BB-3A84-4968-AF98-5D602C4E367A}|Parcial 1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MatrizPatron.cs",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 1\\MatrizPatron.cs",
+              "RelativeDocumentMoniker": "MatrizPatron.cs",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 1\\MatrizPatron.cs",
+              "RelativeToolTip": "MatrizPatron.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T23:57:36.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 1\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 1\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T23:57:07.621Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
