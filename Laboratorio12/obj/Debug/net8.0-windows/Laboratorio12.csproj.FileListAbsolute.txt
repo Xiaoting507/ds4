@@ -1,0 +1,8 @@
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.Form1.resources
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio122.Form1.resources
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.csproj.GenerateResource.cache
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.AssemblyInfoInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.AssemblyInfo.cs
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.csproj.CoreCompileInputs.cache
+C:\Users\liang\source\repos\ds4\Laboratorio12\obj\Debug\net8.0-windows\Laboratorio12.sourcelink.json
