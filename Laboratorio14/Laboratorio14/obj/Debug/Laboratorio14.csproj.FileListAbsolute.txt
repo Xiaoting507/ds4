@@ -1,0 +1,15 @@
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\bin\Debug\Laboratorio14.exe.config
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\bin\Debug\Laboratorio14.exe
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\bin\Debug\Laboratorio14.pdb
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.csproj.AssemblyReference.cache
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.frmProductos.resources
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.Properties.Resources.resources
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.csproj.GenerateResource.cache
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.csproj.CoreCompileInputs.cache
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.exe
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.pdb
+C:\Users\yisse\source\repos\DS4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.exe.config
+C:\Users\liang\source\repos\ds4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.csproj.AssemblyReference.cache
+C:\Users\liang\source\repos\ds4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.exe.config
+C:\Users\liang\source\repos\ds4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.exe
+C:\Users\liang\source\repos\ds4\Laboratorio14\Laboratorio14\obj\Debug\Laboratorio14.pdb
