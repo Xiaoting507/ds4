@@ -1,0 +1,275 @@
+{
+  "info": {
+    "name": "Calculadora Web API - Proyecto #2",
+    "_postman_id": "proyecto2-calculadora-api",
+    "description": "Colección completa de endpoints para la Web API Calculadora\nDesarrollo de Software IV - Prof. Regis Rivera",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "ENDPOINTS OBLIGATORIOS",
+      "item": [
+        {
+          "name": "1. GET - Todos los cálculos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Obtiene todos los cálculos existentes en la base de datos"
+          },
+          "response": []
+        },
+        {
+          "name": "2. GET - Todas las sumas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/calculos/sumas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos", "sumas"]
+            },
+            "description": "Obtiene todas las operaciones de suma (+)"
+          },
+          "response": []
+        },
+        {
+          "name": "3. GET - Todas las restas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/calculos/restas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos", "restas"]
+            },
+            "description": "Obtiene todas las operaciones de resta (-)"
+          },
+          "response": []
+        },
+        {
+          "name": "4. GET - Todas las multiplicaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/calculos/multiplicaciones",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos", "multiplicaciones"]
+            },
+            "description": "Obtiene todas las operaciones de multiplicación (x)"
+          },
+          "response": []
+        },
+        {
+          "name": "5. GET - Todas las divisiones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/calculos/divisiones",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos", "divisiones"]
+            },
+            "description": "Obtiene todas las operaciones de división (/)"
+          },
+          "response": []
+        },
+        {
+          "name": "6. GET - Cálculos recientes (LIBRE)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/calculos/recientes?dias=7",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos", "recientes"],
+              "query": [
+                {
+                  "key": "dias",
+                  "value": "7",
+                  "description": "Número de días hacia atrás"
+                }
+              ]
+            },
+            "description": "ENDPOINT LIBRE: Obtiene cálculos de los últimos N días"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ENDPOINT OPCIONAL",
+      "item": [
+        {
+          "name": "POST - Guardar suma",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valor1\": 15.5,\n  \"valor2\": 4.5,\n  \"operacion\": \"+\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Guarda un nuevo cálculo de suma"
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Guardar resta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valor1\": 20,\n  \"valor2\": 8.5,\n  \"operacion\": \"-\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Guarda un nuevo cálculo de resta"
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Guardar multiplicación",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valor1\": 3.14159,\n  \"valor2\": 2,\n  \"operacion\": \"x\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Guarda un nuevo cálculo de multiplicación"
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Guardar división",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valor1\": 100,\n  \"valor2\": 4,\n  \"operacion\": \"/\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Guarda un nuevo cálculo de división"
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Guardar potencia",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valor1\": 2,\n  \"valor2\": 10,\n  \"operacion\": \"^\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Guarda un nuevo cálculo de potencia"
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Guardar raíz cuadrada",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valor1\": 144,\n  \"valor2\": 0,\n  \"operacion\": \"√\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/calculos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "calculos"]
+            },
+            "description": "Guarda un nuevo cálculo de raíz cuadrada"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "EXTRAS",
+      "item": [
+        {
+          "name": "GET - Información de la API",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Obtiene información general de la API y lista de endpoints"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ]
+}
