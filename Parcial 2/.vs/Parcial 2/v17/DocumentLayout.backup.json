@@ -1,0 +1,108 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 2\\parcial 2.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|solutionrelative:parcial 2.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 2\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|c:\\users\\liang\\source\\repos\\ds4\\parcial 2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4855D53-53D5-4C3F-B85E-D2FB4CE55B12}|Parcial 2.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:06:32.374Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Parcial 2",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Parcial 2.csproj",
+              "RelativeDocumentMoniker": "Parcial 2.csproj",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Parcial 2.csproj",
+              "RelativeToolTip": "Parcial 2.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-28T23:57:04.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:56:09.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAYwO0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:47:20.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\liang\\source\\repos\\ds4\\Parcial 2\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:47:29.168Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

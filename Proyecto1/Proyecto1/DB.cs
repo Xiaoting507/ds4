@@ -6,7 +6,7 @@ namespace Proyecto1
 {
     public class DB
     {
-        private string connectionString = @"Server=PEPEGA\SQLEXPRESS;Database=Productos;Trusted_Connection=True;Encrypt=false;";
+        private string connectionString = @"Server=localhost,1433;Database=CalculadoraDB;User Id=sa;Password=TuPassword123;TrustServerCertificate=True;";
 
         public bool GuardarCalculo(double valor1, double valor2, string operacion, double resultado)
         {
