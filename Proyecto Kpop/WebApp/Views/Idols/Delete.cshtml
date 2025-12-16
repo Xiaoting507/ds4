@@ -1,0 +1,144 @@
+@model SistemaFanclub.Models.Idol
+
+@{
+    ViewData["Title"] = "Eliminar Idol";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Idols" asp-action="Index">Idols</a></li>
+            <li class="breadcrumb-item active">Eliminar</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Confirmar Eliminación
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" role="alert">
+                        <h5 class="alert-heading">
+                            <i class="bi bi-exclamation-octagon me-2"></i>
+                            ¿Está seguro que desea eliminar este idol?
+                        </h5>
+                        <p class="mb-0">Esta acción no se puede deshacer.</p>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4 text-center">
+                            @if (!string.IsNullOrEmpty(Model.FotoURL))
+                            {
+                                <img src="@Model.FotoURL" alt="@Model.NombreArtistico" 
+                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;" 
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%239333ea%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2264%22 fill=%22white%22%3E★%3C/text%3E%3C/svg%3E';" />
+                            }
+                            else
+                            {
+                                <div style="width: 200px; height: 200px; background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                    <i class="bi bi-star-fill text-white" style="font-size: 4rem;"></i>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-8">
+                            <h3 class="mb-3">@Model.NombreArtistico</h3>
+                            
+                            <dl class="row">
+                                <dt class="col-sm-4">Nombre Real:</dt>
+                                <dd class="col-sm-8">@Model.NombreReal</dd>
+
+                                <dt class="col-sm-4">Tipo:</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge" style="background-color: #9333ea;">@Model.TipoIdol</span>
+                                </dd>
+
+                                <dt class="col-sm-4">Fandom:</dt>
+                                <dd class="col-sm-8">
+                                    <i class="bi bi-heart-fill me-1" style="color: #ec4899;"></i>
+                                    @Model.Fandom
+                                </dd>
+
+                                @if (Model.Agencia != null)
+                                {
+                                    <dt class="col-sm-4">Agencia:</dt>
+                                    <dd class="col-sm-8">@Model.Agencia.Nombre</dd>
+                                }
+
+                                <dt class="col-sm-4">País:</dt>
+                                <dd class="col-sm-8">
+                                    <i class="bi bi-flag me-1"></i>
+                                    @Model.Pais
+                                </dd>
+
+                                <dt class="col-sm-4">Fecha Debut:</dt>
+                                <dd class="col-sm-8">
+                                    <i class="bi bi-calendar-event me-1"></i>
+                                    @(Model.FechaDebut?.ToString("dd/MM/yyyy") ?? "N/A")
+                                </dd>
+
+                                @if (!string.IsNullOrEmpty(Model.Genero))
+                                {
+                                    <dt class="col-sm-4">Género Musical:</dt>
+                                    <dd class="col-sm-8">
+                                        <i class="bi bi-music-note me-1"></i>
+                                        @Model.Genero
+                                    </dd>
+                                }
+
+                                <dt class="col-sm-4">Estado:</dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.Activo)
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-check-circle me-1"></i>Activo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-x-circle me-1"></i>Inactivo
+                                        </span>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    @if (Model.Eventos != null && Model.Eventos.Any())
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            <h6 class="alert-heading">
+                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                Advertencia: Este idol tiene eventos asociados
+                            </h6>
+                            <p class="mb-0">
+                                Este idol tiene <strong>@Model.Eventos.Count() evento(s)</strong> asociado(s). 
+                                Eliminar este idol podría afectar estos eventos.
+                            </p>
+                        </div>
+                    }
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="IdolId" />
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                <i class="bi bi-arrow-left me-2"></i>No, Volver a la Lista
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="bi bi-trash me-2"></i>Sí, Eliminar Permanentemente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

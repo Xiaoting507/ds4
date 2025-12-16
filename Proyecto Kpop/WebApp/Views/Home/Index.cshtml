@@ -1,0 +1,194 @@
+@model IEnumerable<Evento>
+
+@{
+    ViewData["Title"] = "Fanclub";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-5">
+            <i class="bi bi-house-door"></i> WEBAPP KPOP Fanclub
+        </h1>
+        @if (Context.Session.GetInt32("UsuarioId").HasValue)
+        {
+            <p class="lead">¡Bienvenido, @Context.Session.GetString("UsuarioNombre")!</p>
+        }
+        else
+        {
+            <p class="lead">
+                Gestiona eventos, reservas y miembros de tu fanclub favorito
+                <a asp-controller="Autenticacion" asp-action="Login" class="btn btn-primary btn-sm">Iniciar Sesión</a>
+            </p>
+        }
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">Idols</h6>
+                    <h2 class="mb-0">@ViewBag.TotalIdols</h2>
+                </div>
+                <div>
+                    <i class="bi bi-star-fill" style="font-size: 2.5rem; opacity: 0.7;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">Miembros</h6>
+                    <h2 class="mb-0">@ViewBag.TotalMiembros</h2>
+                </div>
+                <div>
+                    <i class="bi bi-people" style="font-size: 2.5rem; opacity: 0.7;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">Total Eventos</h6>
+                    <h2 class="mb-0">@ViewBag.TotalEventos</h2>
+                </div>
+                <div>
+                    <i class="bi bi-calendar-check" style="font-size: 2.5rem; opacity: 0.7;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1">Próximos</h6>
+                    <h2 class="mb-0">@ViewBag.ProximosEventos</h2>
+                </div>
+                <div>
+                    <i class="bi bi-calendar-event" style="font-size: 2.5rem; opacity: 0.7;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Próximos Eventos</h5>
+                <a asp-controller="Eventos" asp-action="Proximos" class="btn btn-sm btn-light">
+                    Ver todos <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="row g-3">
+                        @foreach (var evento in Model)
+                        {
+                            <div class="col-md-12">
+                                <div class="card event-card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-2 text-center">
+                                                <div class="text-muted small">@evento.FechaEvento.ToString("MMM", new System.Globalization.CultureInfo("es-ES")).ToUpper()</div>
+                                                <div class="display-6">@evento.FechaEvento.Day</div>
+                                                <div class="text-muted small">@evento.FechaEvento.Year</div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h5 class="card-title mb-2">@evento.Titulo</h5>
+                                                @if (evento.Idol != null)
+                                                {
+                                                    <p class="mb-1">
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <strong>@evento.Idol.NombreArtistico</strong>
+                                                    </p>
+                                                }
+                                                <p class="mb-1">
+                                                    <i class="bi bi-clock"></i> @string.Format("{0:hh\\:mm}", evento.HoraInicio) - @(evento.HoraFin.HasValue ? string.Format("{0:hh\\:mm}", evento.HoraFin.Value) : "N/A")
+                                                </p>
+                                                <p class="mb-0">
+                                                    <i class="bi bi-geo-alt"></i> @evento.Zona
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3 text-end">
+                                                <div class="mb-2">
+                                                    @if (evento.PuestosDisponibles > 0)
+                                                    {
+                                                        <span class="badge bg-success badge-event">
+                                                            @evento.PuestosDisponibles puestos disponibles
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger badge-event">LLENO</span>
+                                                    }
+                                                </div>
+                                                <a asp-controller="Eventos" asp-action="Details" asp-route-id="@evento.EventoId" 
+                                                   class="btn btn-primary btn-sm">
+                                                    Ver Detalles <i class="bi bi-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> No hay eventos próximos programados.
+                        <a asp-controller="Eventos" asp-action="Create" class="alert-link">Crear el primero</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-plus" style="font-size: 3rem; color: var(--primary-color);"></i>
+                <h5 class="mt-3">Crear Evento</h5>
+                <p class="text-muted">Organiza un nuevo evento para el fanclub</p>
+                <a asp-controller="Eventos" asp-action="Create" class="btn btn-primary">Crear Ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-person-plus" style="font-size: 3rem; color: var(--secondary-color);"></i>
+                <h5 class="mt-3">Registrar Miembro</h5>
+                <p class="text-muted">Añade nuevos miembros al fanclub</p>
+                <a asp-controller="Miembros" asp-action="Create" class="btn btn-primary">Registrar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up" style="font-size: 3rem; color: #10b981;"></i>
+                <h5 class="mt-3">Ver Reportes</h5>
+                <p class="text-muted">Estadísticas y análisis del fanclub</p>
+                <a asp-controller="Reportes" asp-action="Dashboard" class="btn btn-primary">Ver Reportes</a>
+            </div>
+        </div>
+    </div>
+</div>

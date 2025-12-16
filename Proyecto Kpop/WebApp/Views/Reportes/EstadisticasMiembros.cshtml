@@ -1,0 +1,136 @@
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Estadísticas de Miembros";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Reportes" asp-action="Index">Reportes</a></li>
+            <li class="breadcrumb-item active">Estadísticas de Miembros</li>
+        </ol>
+    </nav>
+
+    <div class="mb-4">
+        <h2>
+            <i class="bi bi-people me-2" style="color: #ec4899;"></i>
+            Estadísticas de Miembros
+        </h2>
+        <p class="text-muted">Actividad y participación de miembros activos</p>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-center shadow-sm" style="border-left: 4px solid #ec4899;">
+                    <div class="card-body">
+                        <h3 class="mb-0">@Model.Count()</h3>
+                        <small class="text-muted">Miembros Activos</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center shadow-sm" style="border-left: 4px solid #3b82f6;">
+                    <div class="card-body">
+                        <h3 class="mb-0">@Model.Sum(m => (int)m.TotalReservas)</h3>
+                        <small class="text-muted">Total Reservas</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center shadow-sm" style="border-left: 4px solid #10b981;">
+                    <div class="card-body">
+                        <h3 class="mb-0">@Model.Sum(m => (int)m.EventosAsistidos)</h3>
+                        <small class="text-muted">Eventos Asistidos</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center shadow-sm" style="border-left: 4px solid #f59e0b;">
+                    <div class="card-body">
+                        <h3 class="mb-0">@Model.Average(m => (int)m.TotalReservas).ToString("F1")</h3>
+                        <small class="text-muted">Promedio Reservas</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead style="background-color: #f8f9fa;">
+                            <tr>
+                                <th>Miembro</th>
+                                <th>Idol Favorito</th>
+                                <th class="text-center">Total Reservas</th>
+                                <th class="text-center">Asistidos</th>
+                                <th class="text-center">Cancelados</th>
+                                <th>Última Asistencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@item.Miembro.Nombre @item.Miembro.Apellido</strong><br/>
+                                        <small class="text-muted">@item.Miembro.Email</small>
+                                    </td>
+                                    <td>
+                                        @if (item.Miembro.IdolFavorito != null)
+                                        {
+                                            <i class="bi bi-star-fill me-1" style="color: #fbbf24;"></i>
+                                            <span>@item.Miembro.IdolFavorito.NombreArtistico</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Sin favorito</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge" style="background-color: #3b82f6;">@item.TotalReservas</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-success">@item.EventosAsistidos</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-danger">@item.EventosCancelados</span>
+                                    </td>
+                                    <td>
+                                        @if (item.UltimaAsistencia != null)
+                                        {
+                                            DateTime ultimaAsistencia = item.UltimaAsistencia;
+                                            <small>@ultimaAsistencia.ToString("dd/MM/yyyy")</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted">N/A</small>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center py-5">
+            <i class="bi bi-info-circle" style="font-size: 3rem; color: #3b82f6;"></i>
+            <h4 class="mt-3">No hay miembros activos</h4>
+            <p>Los miembros activos aparecerán aquí con sus estadísticas.</p>
+        </div>
+    }
+
+    <div class="mt-3">
+        <a asp-action="Dashboard" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Volver al Dashboard
+        </a>
+    </div>
+</div>

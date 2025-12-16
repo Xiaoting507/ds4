@@ -1,0 +1,144 @@
+@model SistemaFanclub.Models.Reserva
+
+@{
+    ViewData["Title"] = "Editar Reserva";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Reservas" asp-action="Index">Reservas</a></li>
+            <li class="breadcrumb-item active">Editar</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white;">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil me-2"></i>
+                        Editar Reserva
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="ReservaId" />
+                        <input type="hidden" asp-for="EventoId" />
+                        <input type="hidden" asp-for="MiembroId" />
+                        <input type="hidden" asp-for="UsuarioId" />
+                        <input type="hidden" asp-for="FechaReserva" />
+                        <input type="hidden" asp-for="FechaCancelacion" />
+                        
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- Información del Evento (Solo Lectura) -->
+                        @if (Model.Evento != null)
+                        {
+                            <div class="alert alert-info">
+                                <h6 class="alert-heading">
+                                    <i class="bi bi-calendar-event me-2"></i>
+                                    Evento: @Model.Evento.Titulo
+                                </h6>
+                                <small>
+                                    <i class="bi bi-calendar me-1"></i>@Model.Evento.FechaEvento.ToString("dd/MM/yyyy")
+                                    <i class="bi bi-clock ms-2 me-1"></i>@string.Format("{0:hh\\:mm}", Model.Evento.HoraInicio)
+                                    <i class="bi bi-geo-alt ms-2 me-1"></i>@Model.Evento.Zona
+                                </small>
+                            </div>
+                        }
+
+                        <h5 class="mb-3"><i class="bi bi-person me-2"></i>Información de Contacto</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="NombreReserva" class="form-label fw-bold">Nombre para la Reserva</label>
+                            <input asp-for="NombreReserva" class="form-control" placeholder="Nombre completo" />
+                            <span asp-validation-for="NombreReserva" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmailContacto" class="form-label fw-bold">Email de Contacto</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input asp-for="EmailContacto" class="form-control" 
+                                           type="email" placeholder="correo@ejemplo.com" />
+                                </div>
+                                <span asp-validation-for="EmailContacto" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TelefonoContacto" class="form-label fw-bold">Teléfono de Contacto</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                    <input asp-for="TelefonoContacto" class="form-control" 
+                                           placeholder="6XXX-XXXX (opcional)" />
+                                </div>
+                                <span asp-validation-for="TelefonoContacto" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="bi bi-people me-2"></i>Detalles de la Reserva</h5>
+
+                        <div class="mb-3">
+                            <label asp-for="NumeroPersonas" class="form-label fw-bold">Número de Personas</label>
+                            <input asp-for="NumeroPersonas" type="number" min="1" max="10" 
+                                   class="form-control" style="max-width: 200px;" />
+                            <small class="form-text text-muted">Máximo 10 personas por reserva</small>
+                            <span asp-validation-for="NumeroPersonas" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Notas" class="form-label fw-bold">Notas Adicionales</label>
+                            <textarea asp-for="Notas" class="form-control" rows="3" 
+                                      placeholder="Alergias, preferencias de asiento, etc. (opcional)"></textarea>
+                            <span asp-validation-for="Notas" class="text-danger"></span>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="bi bi-check-square me-2"></i>Estado</h5>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input asp-for="Confirmada" class="form-check-input" type="checkbox" role="switch" />
+                                <label asp-for="Confirmada" class="form-check-label fw-bold">
+                                    Reserva Confirmada
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Marcar cuando se haya verificado la reserva</small>
+                        </div>
+
+                        @if (Model.Evento != null && Model.Evento.Estado == "Finalizado")
+                        {
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">¿Asistió al evento?</label>
+                                <div class="form-check">
+                                    <input asp-for="Asistio" class="form-check-input" type="radio" value="true" />
+                                    <label class="form-check-label">Sí, asistió</label>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="Asistio" class="form-check-input" type="radio" value="false" />
+                                    <label class="form-check-label">No asistió</label>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Details" asp-route-id="@Model.ReservaId" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary" 
+                                    style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); border: none;">
+                                <i class="bi bi-check-circle me-2"></i>Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

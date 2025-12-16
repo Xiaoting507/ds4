@@ -1,0 +1,206 @@
+@model Evento
+
+@{
+    ViewData["Title"] = Model.Titulo;
+}
+
+<div class="row mb-3">
+    <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+                <li class="breadcrumb-item"><a asp-action="Proximos">Eventos</a></li>
+                <li class="breadcrumb-item active">@Model.Titulo</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-md-4 text-end">
+        <a asp-action="Proximos" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        @if (Context.Session.GetInt32("UsuarioId").HasValue)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.EventoId" class="btn btn-warning">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            @if (!string.IsNullOrEmpty(Model.ImagenURL))
+            {
+                <img src="@Model.ImagenURL" class="card-img-top" alt="@Model.Titulo" style="height: 400px; object-fit: cover;" />
+            }
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h1 class="card-title">@Model.Titulo</h1>
+                        @if (!string.IsNullOrEmpty(Model.TipoEvento))
+                        {
+                            <span class="badge bg-primary badge-event">@Model.TipoEvento</span>
+                        }
+                        <span class="badge bg-info badge-event">@Model.Estado</span>
+                    </div>
+                </div>
+
+                @if (Model.Idol != null)
+                {
+                    <div class="alert alert-light border mb-3">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <strong>Idol/Grupo:</strong> @Model.Idol.NombreArtistico
+                        @if (!string.IsNullOrEmpty(Model.Idol.Fandom))
+                        {
+                            <span class="text-muted">- Fandom: @Model.Idol.Fandom</span>
+                        }
+                    </div>
+                }
+
+                <h5><i class="bi bi-info-circle"></i> Descripción</h5>
+                @if (!string.IsNullOrEmpty(Model.Descripcion))
+                {
+                    <p class="lead">@Model.Descripcion</p>
+                }
+                else
+                {
+                    <p class="text-muted">Sin descripción</p>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.DireccionDetallada))
+                {
+                    <h5 class="mt-4"><i class="bi bi-map"></i> Cómo Llegar</h5>
+                    <p>@Model.DireccionDetallada</p>
+                }
+            </div>
+        </div>
+
+        @if (Model.Reservas.Any())
+        {
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-ticket-perforated"></i> Reservas Confirmadas (@Model.Reservas.Count(r => r.Confirmada && !r.EstaCancelada))</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        @foreach (var reserva in Model.Reservas.Where(r => r.Confirmada && !r.EstaCancelada).Take(10))
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-person"></i>
+                                        <strong>@reserva.NombreReserva</strong>
+                                        <span class="badge bg-info">@reserva.NumeroPersonas persona(s)</span>
+                                    </div>
+                                    <small class="text-muted">
+                                        Reservado: @reserva.FechaReserva.ToString("dd/MM/yyyy HH:mm")
+                                    </small>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-3 sticky-top" style="top: 20px;">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-calendar3"></i> Información del Evento</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="text-muted">Fecha</h6>
+                <p class="mb-3">
+                    <i class="bi bi-calendar-check"></i>
+                    <strong>@Model.FechaEvento.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("es-ES"))</strong>
+                </p>
+
+                <h6 class="text-muted">Horario</h6>
+                <p class="mb-3">
+                    <i class="bi bi-clock"></i>
+                    <strong>@string.Format("{0:hh\\:mm}", Model.HoraInicio)</strong>
+                    @if (Model.HoraFin.HasValue)
+                    {
+                        <text> - <strong>@Model.HoraFin.Value.ToString(@"hh\:mm")</strong></text>
+                    }
+                </p>
+
+                <h6 class="text-muted">Zona</h6>
+                <p class="mb-3">
+                    <i class="bi bi-geo-alt-fill text-danger"></i>
+                    <strong>@Model.Zona</strong>
+                </p>
+
+                <h6 class="text-muted">Dirección</h6>
+                <p class="mb-3">
+                    <i class="bi bi-map"></i>
+                    @Model.Direccion
+                </p>
+
+                <hr />
+
+                <h6 class="text-muted">Capacidad</h6>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Ocupación</span>
+                        <span><strong>@Model.PuestosOcupados / @Model.Capacidad</strong></span>
+                    </div>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar @(Model.PorcentajeOcupacion > 80 ? "bg-danger" : Model.PorcentajeOcupacion > 50 ? "bg-warning" : "bg-success")" 
+                             role="progressbar" 
+                             style="width: @Model.PorcentajeOcupacion%">
+                            @Model.PorcentajeOcupacion.ToString("F0")%
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        @if (Model.PuestosDisponibles > 0)
+                        {
+                            <span class="badge bg-success badge-event">
+                                @Model.PuestosDisponibles puestos disponibles
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger badge-event">EVENTO LLENO</span>
+                        }
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="d-grid gap-2">
+                    @if (Model.PuestosDisponibles > 0 && Model.EsProximo)
+                    {
+                        <a asp-action="Reservar" asp-route-id="@Model.EventoId" class="btn btn-success btn-lg">
+                            <i class="bi bi-ticket-perforated"></i> Reservar Ahora
+                        </a>
+                    }
+                    else if (Model.EstaLleno)
+                    {
+                        <button class="btn btn-secondary btn-lg" disabled>
+                            <i class="bi bi-x-circle"></i> Sin Puestos Disponibles
+                        </button>
+                    }
+                    else if (!Model.EsProximo)
+                    {
+                        <button class="btn btn-secondary btn-lg" disabled>
+                            <i class="bi bi-calendar-x"></i> Evento Finalizado
+                        </button>
+                    }
+                </div>
+
+                @if (Model.CreadoPor != null)
+                {
+                    <div class="mt-3 text-center small text-muted">
+                        <i class="bi bi-person-badge"></i>
+                        Creado por: @Model.CreadoPor.NombreCompleto<br />
+                        @Model.FechaCreacion.ToString("dd/MM/yyyy")
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

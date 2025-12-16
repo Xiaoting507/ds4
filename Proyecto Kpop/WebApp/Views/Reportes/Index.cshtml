@@ -1,0 +1,211 @@
+@{
+    ViewData["Title"] = "Reportes y Estadísticas";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item active">Reportes</li>
+        </ol>
+    </nav>
+
+    <div class="mb-4">
+        <h2>
+            <i class="bi bi-bar-chart-line me-2" style="color: #9333ea;"></i>
+            Reportes y Estadísticas
+        </h2>
+        <p class="text-muted">Análisis detallado de la actividad del fanclub</p>
+    </div>
+
+    <!-- Tarjetas de Reportes Disponibles -->
+    <div class="row g-4">
+        <!-- Dashboard General -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" 
+                             style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);">
+                            <i class="bi bi-speedometer2 fs-3 text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Dashboard General</h5>
+                            <small class="text-muted">Vista completa de métricas</small>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        Estadísticas generales del fanclub, eventos por mes, top idols y estado de reservas.
+                    </p>
+                    <a asp-action="Dashboard" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Ver Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asistencia a Eventos -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" 
+                             style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%);">
+                            <i class="bi bi-calendar-check fs-3 text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Asistencia a Eventos</h5>
+                            <small class="text-muted">Control de participación</small>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        Reporte de asistencia real vs reservas confirmadas en eventos pasados.
+                    </p>
+                    <a asp-action="AsistenciaEventos" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Ver Reporte
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas de Miembros -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" 
+                             style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);">
+                            <i class="bi bi-people fs-3 text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Estadísticas de Miembros</h5>
+                            <small class="text-muted">Actividad de miembros</small>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        Análisis de participación de miembros: reservas, asistencias y cancelaciones.
+                    </p>
+                    <a asp-action="EstadisticasMiembros" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Ver Reporte
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Eventos Populares -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" 
+                             style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%);">
+                            <i class="bi bi-trophy fs-3 text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Eventos Más Populares</h5>
+                            <small class="text-muted">Top 20 eventos</small>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        Ranking de eventos más concurridos por número de reservas y porcentaje de ocupación.
+                    </p>
+                    <a asp-action="EventosPopulares" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Ver Reporte
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reporte por Idol -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" 
+                             style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);">
+                            <i class="bi bi-star-fill fs-3 text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Estadísticas por Idol</h5>
+                            <small class="text-muted">Análisis por artista</small>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        Eventos organizados, fans activos y próximos eventos de cada idol o grupo.
+                    </p>
+                    <a asp-action="PorIdol" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Ver Reporte
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reporte por Zona -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle p-3 me-3" 
+                             style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%);">
+                            <i class="bi bi-geo-alt-fill fs-3 text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Estadísticas por Zona</h5>
+                            <small class="text-muted">Análisis geográfico</small>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        Distribución de eventos por zona geográfica con capacidad y ocupación.
+                    </p>
+                    <a asp-action="PorZona" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Ver Reporte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información Adicional -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card shadow-sm" style="border-left: 4px solid #9333ea;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Acerca de los Reportes
+                    </h5>
+                    <p class="card-text mb-2">
+                        Los reportes se generan en tiempo real basándose en la información actualizada de la base de datos.
+                    </p>
+                    <ul class="mb-0">
+                        <li>Todos los datos son calculados automáticamente</li>
+                        <li>Las estadísticas incluyen solo eventos y miembros activos</li>
+                        <li>Los porcentajes se redondean a dos decimales</li>
+                        <li>Los reportes pueden exportarse usando las funciones de impresión del navegador</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    border-color: #9333ea;
+}
+
+.rounded-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>

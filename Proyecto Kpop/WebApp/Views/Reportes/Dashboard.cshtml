@@ -1,0 +1,279 @@
+@{
+    ViewData["Title"] = "Dashboard de Reportes";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Reportes" asp-action="Index">Reportes</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+
+    <div class="mb-4">
+        <h2>
+            <i class="bi bi-speedometer2 me-2" style="color: #9333ea;"></i>
+            Dashboard General
+        </h2>
+        <p class="text-muted">Vista completa de estadísticas del fanclub</p>
+    </div>
+
+    <!-- Acciones Rápidas -->
+    <div class="card shadow-sm mb-4" style="border-left: 4px solid #9333ea;">
+        <div class="card-body">
+            <h5 class="card-title mb-3">
+                <i class="bi bi-lightning-charge-fill me-2" style="color: #9333ea;"></i>
+                Acciones Rápidas
+            </h5>
+            <div class="d-flex flex-wrap gap-2">
+                <a asp-action="AsistenciaEventos" class="btn btn-outline-primary">
+                    <i class="bi bi-calendar-check me-2"></i>Ver Asistencia
+                </a>
+                <a asp-action="EstadisticasMiembros" class="btn btn-outline-primary">
+                    <i class="bi bi-people me-2"></i>Ver Miembros
+                </a>
+                <a asp-action="EventosPopulares" class="btn btn-outline-primary">
+                    <i class="bi bi-trophy me-2"></i>Eventos Populares
+                </a>
+                <a asp-action="PorIdol" class="btn btn-outline-primary">
+                    <i class="bi bi-star me-2"></i>Por Idol
+                </a>
+                <a asp-action="PorZona" class="btn btn-outline-primary">
+                    <i class="bi bi-geo-alt me-2"></i>Por Zona
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm h-100" style="border-left: 4px solid #9333ea;">
+                <div class="card-body">
+                    <i class="bi bi-star-fill fs-1 mb-2" style="color: #fbbf24;"></i>
+                    <h3 class="mb-0">@ViewBag.TotalIdols</h3>
+                    <p class="text-muted mb-0">Idols Activos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm h-100" style="border-left: 4px solid #ec4899;">
+                <div class="card-body">
+                    <i class="bi bi-people-fill fs-1 mb-2" style="color: #ec4899;"></i>
+                    <h3 class="mb-0">@ViewBag.TotalMiembros</h3>
+                    <p class="text-muted mb-0">Miembros Activos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm h-100" style="border-left: 4px solid #3b82f6;">
+                <div class="card-body">
+                    <i class="bi bi-calendar-event fs-1 mb-2" style="color: #3b82f6;"></i>
+                    <h3 class="mb-0">@ViewBag.TotalEventos</h3>
+                    <p class="text-muted mb-0">Total Eventos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm h-100" style="border-left: 4px solid #10b981;">
+                <div class="card-body">
+                    <i class="bi bi-check-circle-fill fs-1 mb-2" style="color: #10b981;"></i>
+                    <h3 class="mb-0">@ViewBag.TotalReservas</h3>
+                    <p class="text-muted mb-0">Reservas Activas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        Eventos Realizados
+                    </h5>
+                    <h2 class="text-success">@ViewBag.EventosRealizados</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <i class="bi bi-calendar-plus me-2"></i>
+                        Próximos Eventos
+                    </h5>
+                    <h2 class="text-info">@ViewBag.ProximosEventos</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <i class="bi bi-ticket-perforated me-2"></i>
+                        Total Reservas
+                    </h5>
+                    <h2 class="text-primary">@ViewBag.TotalReservas</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-bar-chart-line me-2"></i>
+                        Eventos por Mes (Últimos 6 meses)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.EventosPorMes != null && ((IEnumerable<dynamic>)ViewBag.EventosPorMes).Any())
+                    {
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Mes</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.EventosPorMes)
+                                {
+                                    <tr>
+                                        <td>@item.Mes</td>
+                                        <td class="text-end">
+                                            <span class="badge bg-primary">@item.Total</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">No hay datos de eventos en los últimos 6 meses.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header" style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%); color: white;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-trophy me-2"></i>
+                        Top 5 Idols Más Populares
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.TopIdols != null && ((IEnumerable<dynamic>)ViewBag.TopIdols).Any())
+                    {
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Idol</th>
+                                    <th class="text-end">Eventos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var idol in ViewBag.TopIdols)
+                                {
+                                    <tr>
+                                        <td>
+                                            <i class="bi bi-star-fill me-1" style="color: #fbbf24;"></i>
+                                            @idol.Nombre
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="badge" style="background-color: #9333ea;">@idol.TotalEventos</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">No hay datos de idols disponibles.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header" style="background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%); color: white;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-clipboard-check me-2"></i>
+                        Estado de Reservas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <i class="bi bi-check-circle-fill fs-1 text-success mb-2"></i>
+                                <h3 class="mb-0">@ViewBag.ReservasConfirmadas</h3>
+                                <p class="text-muted">Confirmadas</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <i class="bi bi-clock-fill fs-1 text-warning mb-2"></i>
+                                <h3 class="mb-0">@ViewBag.ReservasPendientes</h3>
+                                <p class="text-muted">Pendientes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <i class="bi bi-x-circle-fill fs-1 text-danger mb-2"></i>
+                                <h3 class="mb-0">@ViewBag.ReservasCanceladas</h3>
+                                <p class="text-muted">Canceladas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm" style="border-left: 4px solid #9333ea;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-graph-up me-2"></i>
+                        Acciones Rápidas
+                    </h5>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a asp-action="AsistenciaEventos" class="btn btn-outline-primary">
+                            <i class="bi bi-calendar-check me-1"></i>Ver Asistencia
+                        </a>
+                        <a asp-action="EstadisticasMiembros" class="btn btn-outline-primary">
+                            <i class="bi bi-people me-1"></i>Ver Miembros
+                        </a>
+                        <a asp-action="EventosPopulares" class="btn btn-outline-primary">
+                            <i class="bi bi-trophy me-1"></i>Eventos Populares
+                        </a>
+                        <a asp-action="PorIdol" class="btn btn-outline-primary">
+                            <i class="bi bi-star me-1"></i>Por Idol
+                        </a>
+                        <a asp-action="PorZona" class="btn btn-outline-primary">
+                            <i class="bi bi-geo-alt me-1"></i>Por Zona
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

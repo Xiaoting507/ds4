@@ -1,0 +1,154 @@
+@model SistemaFanclub.Models.Miembro
+
+@{
+    ViewData["Title"] = "Registrar Miembro";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Miembros" asp-action="Index">Miembros</a></li>
+            <li class="breadcrumb-item active">Registrar Miembro</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%); color: white;">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-plus me-2"></i>
+                        Registrar Nuevo Miembro
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- Información Personal -->
+                        <h5 class="mb-3"><i class="bi bi-person me-2"></i>Información Personal</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Nombre" class="form-label fw-bold">Nombre</label>
+                                <input asp-for="Nombre" class="form-control" placeholder="Primer nombre" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Apellido" class="form-label fw-bold">Apellido</label>
+                                <input asp-for="Apellido" class="form-control" placeholder="Apellido" />
+                                <span asp-validation-for="Apellido" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Contacto -->
+                        <h5 class="mb-3 mt-4"><i class="bi bi-envelope me-2"></i>Información de Contacto</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input asp-for="Email" type="email" class="form-control" 
+                                       placeholder="correo@ejemplo.com" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Telefono" class="form-label fw-bold">Teléfono</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                <input asp-for="Telefono" type="tel" class="form-control" 
+                                       placeholder="6000-0000" />
+                            </div>
+                            <span asp-validation-for="Telefono" class="text-danger"></span>
+                        </div>
+
+                        <!-- Rol en el Fanclub -->
+                        <h5 class="mb-3 mt-4"><i class="bi bi-star me-2"></i>Información del Fanclub</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="RolFanclub" class="form-label fw-bold">Rol en el Fanclub</label>
+                            <select asp-for="RolFanclub" class="form-select">
+                                <option value="">-- Seleccionar Rol --</option>
+                                <option value="Miembro">Miembro</option>
+                                <option value="Moderador">Moderador</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Organizador">Organizador</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Voluntario">Voluntario</option>
+                            </select>
+                            <span asp-validation-for="RolFanclub" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdolFavoritoId" class="form-label fw-bold">Idol Favorito</label>
+                            <select asp-for="IdolFavoritoId" class="form-select" asp-items="ViewBag.IdolFavoritoId">
+                                <option value="">-- Seleccionar Idol --</option>
+                            </select>
+                            <small class="form-text text-muted">¿A qué idol o grupo sigue este miembro?</small>
+                            <span asp-validation-for="IdolFavoritoId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UsuarioId" class="form-label fw-bold">Usuario Asociado (Opcional)</label>
+                            <select asp-for="UsuarioId" class="form-select" asp-items="ViewBag.UsuarioId">
+                                <option value="">-- Sin usuario asociado --</option>
+                            </select>
+                            <small class="form-text text-muted">Si este miembro tiene cuenta en el sistema</small>
+                            <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FechaIngreso" class="form-label fw-bold">Fecha de Ingreso al Fanclub</label>
+                            <input asp-for="FechaIngreso" type="date" class="form-control" />
+                            <span asp-validation-for="FechaIngreso" class="text-danger"></span>
+                        </div>
+
+                        <!-- Biografía -->
+                        <div class="mb-3">
+                            <label asp-for="Biografia" class="form-label fw-bold">Biografía / Notas</label>
+                            <textarea asp-for="Biografia" class="form-control" rows="3" 
+                                      placeholder="Información adicional sobre el miembro..."></textarea>
+                            <span asp-validation-for="Biografia" class="text-danger"></span>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="Activo" class="form-check-input" type="checkbox" checked />
+                                <label asp-for="Activo" class="form-check-label fw-bold">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    Miembro Activo
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Desmarcar si el miembro ya no está activo</small>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>Nota:</strong> El miembro podrá reservar puestos en eventos una vez registrado.
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary" 
+                                    style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%); border: none;">
+                                <i class="bi bi-check-circle me-2"></i>Registrar Miembro
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

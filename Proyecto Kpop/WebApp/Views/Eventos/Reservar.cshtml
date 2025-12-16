@@ -1,0 +1,111 @@
+@model Reserva
+
+@{
+    ViewData["Title"] = "Reservar Puesto";
+    var evento = ViewBag.Evento as Evento;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-ticket-perforated"></i> Reservar Puesto en Evento</h4>
+            </div>
+            <div class="card-body">
+                @if (evento != null)
+                {
+                    <div class="alert alert-info">
+                        <h5>@evento.Titulo</h5>
+                        <p class="mb-1">
+                            <i class="bi bi-calendar3"></i>
+                            <strong>@evento.FechaEvento.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("es-ES"))</strong>
+                        </p>
+                        <p class="mb-1">
+                            <i class="bi bi-clock"></i>
+                            @string.Format("{0:hh\\:mm}", evento.HoraInicio)
+                        </p>
+                        <p class="mb-0">
+                            <i class="bi bi-geo-alt"></i>
+                            @evento.Zona - @evento.Direccion
+                        </p>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <strong>Puestos disponibles: @evento.PuestosDisponibles</strong>
+                    </div>
+                }
+
+                <form asp-action="Reservar" method="post">
+                    <input type="hidden" asp-for="EventoId" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NombreReserva" class="form-label"></label>
+                            <input asp-for="NombreReserva" class="form-control" placeholder="Nombre completo" />
+                            <span asp-validation-for="NombreReserva" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EmailContacto" class="form-label"></label>
+                            <input asp-for="EmailContacto" class="form-control" placeholder="tu@email.com" />
+                            <span asp-validation-for="EmailContacto" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="TelefonoContacto" class="form-label"></label>
+                            <input asp-for="TelefonoContacto" class="form-control" placeholder="+507 1234-5678" />
+                            <span asp-validation-for="TelefonoContacto" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NumeroPersonas" class="form-label"></label>
+                            <select asp-for="NumeroPersonas" class="form-select">
+                                @for (int i = 1; i <= Math.Min(10, evento?.PuestosDisponibles ?? 1); i++)
+                                {
+                                    <option value="@i">@i persona(s)</option>
+                                }
+                            </select>
+                            <span asp-validation-for="NumeroPersonas" class="text-danger"></span>
+                            <small class="form-text text-muted">Máximo 10 personas por reserva</small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Notas" class="form-label"></label>
+                        <textarea asp-for="Notas" class="form-control" rows="3" placeholder="Comentarios adicionales (opcional)"></textarea>
+                        <span asp-validation-for="Notas" class="text-danger"></span>
+                    </div>
+
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <h6><i class="bi bi-info-circle"></i> Información importante</h6>
+                            <ul class="mb-0 small">
+                                <li>Tu reserva será confirmada inmediatamente</li>
+                                <li>Recibirás un código de confirmación</li>
+                                <li>Puedes cancelar tu reserva hasta 24 horas antes del evento</li>
+                                <li>Por favor llega 15 minutos antes del evento</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-check-circle"></i> Confirmar Reserva
+                        </button>
+                        <a asp-action="Details" asp-route-id="@evento?.EventoId" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

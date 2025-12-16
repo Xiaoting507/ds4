@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="bi bi-stars" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    <h2 class="mt-3">Iniciar Sesión</h2>
+                    <p class="text-muted">Accede a tu cuenta del fanclub</p>
+                </div>
+
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" name="email" class="form-control" placeholder="tu@email.com" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" name="password" class="form-control" placeholder="••••••••" required />
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                        </button>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="mb-0">
+                            ¿No tienes cuenta?
+                            <a asp-action="Registro" class="text-decoration-none">Regístrate aquí</a>
+                        </p>
+                    </div>
+                </form>
+
+                <hr class="my-4" />
+
+                <div class="alert alert-info mb-0">
+                    <small>
+                        <i class="bi bi-info-circle"></i>
+                        <strong>Usuarios de prueba:</strong><br />
+                        Email: <code>leonardo@fanclub.com</code><br />
+                        Password: <code>password</code>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

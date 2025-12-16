@@ -1,0 +1,199 @@
+@model SistemaFanclub.Models.Evento
+
+@{
+    ViewData["Title"] = "Crear Evento";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Eventos" asp-action="Index">Eventos</a></li>
+            <li class="breadcrumb-item active">Crear Evento</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white;">
+                    <h4 class="mb-0">
+                        <i class="bi bi-calendar-plus me-2"></i>
+                        Crear Nuevo Evento
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- Información Básica -->
+                        <h5 class="mb-3"><i class="bi bi-info-circle me-2"></i>Información Básica</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Titulo" class="form-label fw-bold">Título del Evento</label>
+                            <input asp-for="Titulo" class="form-control" placeholder="Ej: BTS Cup Sleeve Event" />
+                            <span asp-validation-for="Titulo" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Descripcion" class="form-label fw-bold">Descripción</label>
+                            <textarea asp-for="Descripcion" class="form-control" rows="4" 
+                                      placeholder="Describe el evento, actividades, qué pueden esperar los fans..."></textarea>
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="IdolId" class="form-label fw-bold">Idol/Grupo</label>
+                                <select asp-for="IdolId" class="form-select" asp-items="ViewBag.IdolId">
+                                    <option value="">-- Seleccionar Idol --</option>
+                                </select>
+                                <span asp-validation-for="IdolId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TipoEvento" class="form-label fw-bold">Tipo de Evento</label>
+                                <select asp-for="TipoEvento" class="form-select">
+                                    <option value="">-- Seleccionar Tipo --</option>
+                                    <option value="Cup Sleeve">Cup Sleeve</option>
+                                    <option value="Listening Party">Listening Party</option>
+                                    <option value="Dance Cover">Dance Cover</option>
+                                    <option value="Birthday Party">Birthday Party</option>
+                                    <option value="Album Release">Album Release</option>
+                                    <option value="Viewing Party">Viewing Party</option>
+                                    <option value="Game Night">Game Night</option>
+                                    <option value="Photo Exhibition">Photo Exhibition</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                                <span asp-validation-for="TipoEvento" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Fecha y Hora -->
+                        <h5 class="mb-3 mt-4"><i class="bi bi-calendar-event me-2"></i>Fecha y Hora</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FechaEvento" class="form-label fw-bold">Fecha del Evento</label>
+                                <input asp-for="FechaEvento" type="date" class="form-control" />
+                                <span asp-validation-for="FechaEvento" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="HoraInicio" class="form-label fw-bold">Hora Inicio</label>
+                                <input asp-for="HoraInicio" type="time" class="form-control" />
+                                <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="HoraFin" class="form-label fw-bold">Hora Fin</label>
+                                <input asp-for="HoraFin" type="time" class="form-control" />
+                                <span asp-validation-for="HoraFin" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Ubicación -->
+                        <h5 class="mb-3 mt-4"><i class="bi bi-geo-alt me-2"></i>Ubicación</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Zona" class="form-label fw-bold">Zona</label>
+                                <select asp-for="Zona" class="form-select">
+                                    <option value="">-- Seleccionar Zona --</option>
+                                    <option value="Ciudad de Panamá">Ciudad de Panamá</option>
+                                    <option value="Panamá Norte">Panamá Norte</option>
+                                    <option value="Panamá Oeste">Panamá Oeste</option>
+                                    <option value="Panamá Este">Panamá Este</option>
+                                    <option value="Chiriquí">Chiriquí</option>
+                                    <option value="Coclé">Coclé</option>
+                                    <option value="Colón">Colón</option>
+                                    <option value="Herrera">Herrera</option>
+                                    <option value="Los Santos">Los Santos</option>
+                                    <option value="Veraguas">Veraguas</option>
+                                    <option value="Bocas del Toro">Bocas del Toro</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                                <span asp-validation-for="Zona" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Capacidad" class="form-label fw-bold">Capacidad</label>
+                                <input asp-for="Capacidad" type="number" class="form-control" min="1" 
+                                       placeholder="Número máximo de personas" />
+                                <span asp-validation-for="Capacidad" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Direccion" class="form-label fw-bold">Dirección</label>
+                            <input asp-for="Direccion" class="form-control" 
+                                   placeholder="Ej: Café Unido, Calle 50" />
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="DireccionDetallada" class="form-label fw-bold">Dirección Detallada</label>
+                            <textarea asp-for="DireccionDetallada" class="form-control" rows="2" 
+                                      placeholder="Indicaciones adicionales, puntos de referencia..."></textarea>
+                            <span asp-validation-for="DireccionDetallada" class="text-danger"></span>
+                        </div>
+
+                        <!-- Imagen y Estado -->
+                        <h5 class="mb-3 mt-4"><i class="bi bi-image me-2"></i>Detalles Adicionales</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="ImagenURL" class="form-label fw-bold">URL de Imagen</label>
+                            <input asp-for="ImagenURL" class="form-control" 
+                                   placeholder="https://ejemplo.com/imagen.jpg (opcional)" />
+                            <small class="form-text text-muted">URL de la imagen promocional del evento</small>
+                            <span asp-validation-for="ImagenURL" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Estado" class="form-label fw-bold">Estado</label>
+                                <select asp-for="Estado" class="form-select">
+                                    <option value="Programado" selected>Programado</option>
+                                    <option value="EnCurso">En Curso</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                    <option value="Cancelado">Cancelado</option>
+                                </select>
+                                <span asp-validation-for="Estado" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Requiere Reserva</label>
+                                <div class="form-check">
+                                    <input asp-for="RequiereReserva" class="form-check-input" type="checkbox" checked />
+                                    <label asp-for="RequiereReserva" class="form-check-label">
+                                        Sí, este evento requiere reserva previa
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>Nota:</strong> Los puestos disponibles se establecerán automáticamente igual a la capacidad.
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary" 
+                                    style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); border: none;">
+                                <i class="bi bi-check-circle me-2"></i>Crear Evento
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

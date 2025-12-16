@@ -1,0 +1,198 @@
+@model IEnumerable<SistemaFanclub.Models.Idol>
+
+@{
+    ViewData["Title"] = "Gestión de Idols";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item active">Idols</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>
+                <i class="bi bi-star-fill me-2" style="color: #fbbf24;"></i>
+                Gestión de Idols
+            </h2>
+            <p class="text-muted mb-0">@Model.Count() idols/grupos registrados</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary btn-lg" 
+           style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); border: none;">
+            <i class="bi bi-star-fill me-2"></i>Agregar Idol
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Buscar</label>
+                    <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" 
+                           class="form-control" placeholder="Buscar por nombre artístico..." />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Tipo</label>
+                    <select name="tipoIdol" class="form-select">
+                        <option value="">Todos los tipos</option>
+                        <option value="Grupo">Grupos</option>
+                        <option value="Solista">Solistas</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-2"></i>Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var idol in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm hover-card">
+                        @if (!string.IsNullOrEmpty(idol.FotoURL))
+                        {
+                            <div style="height: 200px; overflow: hidden; background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);">
+                                <img src="@idol.FotoURL" class="card-img-top" alt="@idol.NombreArtistico" 
+                                     style="height: 100%; object-fit: cover;" 
+                                     onerror="this.style.display='none';" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="height: 200px; background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-star-fill text-white" style="font-size: 4rem;"></i>
+                            </div>
+                        }
+                        
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">@idol.NombreArtistico</h5>
+                                <span class="badge" style="background-color: #9333ea;">@idol.TipoIdol</span>
+                            </div>
+                            
+                            @if (!string.IsNullOrEmpty(idol.NombreReal) && idol.NombreReal != idol.NombreArtistico)
+                            {
+                                <p class="text-muted mb-2">
+                                    <small><i class="bi bi-person me-1"></i>@idol.NombreReal</small>
+                                </p>
+                            }
+                            
+                            <p class="card-text">
+                                <i class="bi bi-heart-fill me-1" style="color: #ec4899;"></i>
+                                <strong>Fandom:</strong> @idol.Fandom
+                            </p>
+                            
+                            @if (idol.Agencia != null)
+                            {
+                                <p class="card-text mb-2">
+                                    <i class="bi bi-building me-1"></i>
+                                    <strong>Agencia:</strong> @idol.Agencia.Nombre
+                                </p>
+                            }
+                            
+                            <p class="card-text mb-2">
+                                <i class="bi bi-calendar me-1"></i>
+                                <strong>Debut:</strong> @(idol.FechaDebut?.ToString("dd/MM/yyyy") ?? "N/A")
+                            </p>
+                            
+                            <p class="card-text mb-2">
+                                <i class="bi bi-flag me-1"></i>
+                                <strong>País:</strong> @idol.Pais
+                            </p>
+                            
+                            @if (!string.IsNullOrEmpty(idol.Genero))
+                            {
+                                <p class="card-text mb-3">
+                                    <i class="bi bi-music-note me-1"></i>
+                                    <strong>Género:</strong> @idol.Genero
+                                </p>
+                            }
+                            
+                            @if (idol.Activo)
+                            {
+                                <span class="badge bg-success mb-3">
+                                    <i class="bi bi-check-circle me-1"></i>Activo
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary mb-3">
+                                    <i class="bi bi-x-circle me-1"></i>Inactivo
+                                </span>
+                            }
+                            
+                            <div class="d-flex gap-2">
+                                <a asp-action="Details" asp-route-id="@idol.IdolId" 
+                                   class="btn btn-sm btn-outline-info flex-grow-1">
+                                    <i class="bi bi-eye me-1"></i>Ver
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@idol.IdolId" 
+                                   class="btn btn-sm btn-outline-warning flex-grow-1">
+                                    <i class="bi bi-pencil me-1"></i>Editar
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@idol.IdolId" 
+                                   class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-primary mb-0">@Model.Count(i => i.TipoIdol == "Grupo")</h3>
+                        <small class="text-muted">Grupos</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-success mb-0">@Model.Count(i => i.TipoIdol == "Solista")</h3>
+                        <small class="text-muted">Solistas</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-info mb-0">@Model.Count(i => i.Activo)</h3>
+                        <small class="text-muted">Activos</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            No hay idols registrados. <a asp-action="Create" class="alert-link">Agregar el primer idol</a>
+        </div>
+    }
+</div>
+
+<style>
+.hover-card {
+    transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+</style>

@@ -1,0 +1,220 @@
+@model SistemaFanclub.Models.Reserva
+
+@{
+    ViewData["Title"] = "Detalles de la Reserva";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Reservas" asp-action="Index">Reservas</a></li>
+            <li class="breadcrumb-item active">Detalles</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white;">
+                    <h4 class="mb-0">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        Detalles de la Reserva
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- Estado de la Reserva -->
+                    <div class="text-center mb-4">
+                        @switch (Model.EstadoReserva)
+                        {
+                            case "Confirmada":
+                                <span class="badge bg-success p-3" style="font-size: 1.2rem;">
+                                    <i class="bi bi-check-circle me-2"></i>CONFIRMADA
+                                </span>
+                                break;
+                            case "Pendiente":
+                                <span class="badge bg-warning text-dark p-3" style="font-size: 1.2rem;">
+                                    <i class="bi bi-clock me-2"></i>PENDIENTE
+                                </span>
+                                break;
+                            case "Cancelada":
+                                <span class="badge bg-danger p-3" style="font-size: 1.2rem;">
+                                    <i class="bi bi-x-circle me-2"></i>CANCELADA
+                                </span>
+                                break;
+                            case "Asistió":
+                                <span class="badge bg-primary p-3" style="font-size: 1.2rem;">
+                                    <i class="bi bi-check-all me-2"></i>ASISTIÓ
+                                </span>
+                                break;
+                            case "No Asistió":
+                                <span class="badge bg-secondary p-3" style="font-size: 1.2rem;">
+                                    <i class="bi bi-x me-2"></i>NO ASISTIÓ
+                                </span>
+                                break;
+                        }
+                    </div>
+
+                    <!-- Información del Evento -->
+                    @if (Model.Evento != null)
+                    {
+                        <div class="card mb-4" style="border-left: 4px solid #8b5cf6;">
+                            <div class="card-body">
+                                <h5>
+                                    <i class="bi bi-calendar-event me-2"></i>
+                                    Información del Evento
+                                </h5>
+                                <hr/>
+                                <dl class="row mb-0">
+                                    <dt class="col-sm-4">Evento:</dt>
+                                    <dd class="col-sm-8">
+                                        <strong>@Model.Evento.Titulo</strong>
+                                        <a asp-controller="Eventos" asp-action="Details" asp-route-id="@Model.Evento.EventoId" 
+                                           class="btn btn-sm btn-outline-primary ms-2">
+                                            <i class="bi bi-eye"></i> Ver Evento
+                                        </a>
+                                    </dd>
+
+                                    <dt class="col-sm-4">Fecha:</dt>
+                                    <dd class="col-sm-8">
+                                        <i class="bi bi-calendar me-1"></i>
+                                        @Model.Evento.FechaEvento.ToString("dd/MM/yyyy")
+                                    </dd>
+
+                                    <dt class="col-sm-4">Hora:</dt>
+                                    <dd class="col-sm-8">
+                                        <i class="bi bi-clock me-1"></i>
+                                        @string.Format("{0:hh\\:mm}", Model.Evento.HoraInicio)
+                                    </dd>
+
+                                    <dt class="col-sm-4">Zona:</dt>
+                                    <dd class="col-sm-8">
+                                        <i class="bi bi-geo-alt me-1"></i>
+                                        @Model.Evento.Zona
+                                    </dd>
+
+                                    <dt class="col-sm-4">Dirección:</dt>
+                                    <dd class="col-sm-8">@Model.Evento.Direccion</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Información de la Reserva -->
+                    <div class="card mb-4" style="border-left: 4px solid #ec4899;">
+                        <div class="card-body">
+                            <h5>
+                                <i class="bi bi-person me-2"></i>
+                                Información de la Reserva
+                            </h5>
+                            <hr/>
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4">Reserva #:</dt>
+                                <dd class="col-sm-8">
+                                    <strong>@Model.ReservaId</strong>
+                                </dd>
+
+                                <dt class="col-sm-4">Nombre:</dt>
+                                <dd class="col-sm-8">@Model.NombreReserva</dd>
+
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <i class="bi bi-envelope me-1"></i>
+                                    <a href="mailto:@Model.EmailContacto">@Model.EmailContacto</a>
+                                </dd>
+
+                                @if (!string.IsNullOrEmpty(Model.TelefonoContacto))
+                                {
+                                    <dt class="col-sm-4">Teléfono:</dt>
+                                    <dd class="col-sm-8">
+                                        <i class="bi bi-telephone me-1"></i>
+                                        @Model.TelefonoContacto
+                                    </dd>
+                                }
+
+                                <dt class="col-sm-4">Número de Personas:</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge" style="background-color: #8b5cf6; font-size: 1rem;">
+                                        <i class="bi bi-people me-1"></i>@Model.NumeroPersonas persona@(Model.NumeroPersonas != 1 ? "s" : "")
+                                    </span>
+                                </dd>
+
+                                @if (Model.Miembro != null)
+                                {
+                                    <dt class="col-sm-4">Miembro Asociado:</dt>
+                                    <dd class="col-sm-8">
+                                        <i class="bi bi-person-badge me-1"></i>
+                                        @Model.Miembro.Nombre @Model.Miembro.Apellido
+                                    </dd>
+                                }
+
+                                <dt class="col-sm-4">Fecha de Reserva:</dt>
+                                <dd class="col-sm-8">
+                                    @Model.FechaReserva.ToString("dd/MM/yyyy HH:mm")
+                                </dd>
+
+                                @if (Model.EstaCancelada && Model.FechaCancelacion.HasValue)
+                                {
+                                    <dt class="col-sm-4">Fecha de Cancelación:</dt>
+                                    <dd class="col-sm-8 text-danger">
+                                        <i class="bi bi-x-circle me-1"></i>
+                                        @Model.FechaCancelacion.Value.ToString("dd/MM/yyyy HH:mm")
+                                    </dd>
+                                }
+
+                                @if (!string.IsNullOrEmpty(Model.Notas))
+                                {
+                                    <dt class="col-sm-4">Notas:</dt>
+                                    <dd class="col-sm-8">
+                                        <div class="alert alert-info mb-0">
+                                            @Model.Notas
+                                        </div>
+                                    </dd>
+                                }
+                            </dl>
+                        </div>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>Volver a la Lista
+                        </a>
+                        
+                        @if (!Model.EstaCancelada)
+                        {
+                            <div>
+                                @if (!Model.Confirmada)
+                                {
+                                    <form asp-action="Confirmar" asp-route-id="@Model.ReservaId" method="post" class="d-inline me-2">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="bi bi-check-circle me-2"></i>Confirmar Reserva
+                                        </button>
+                                    </form>
+                                }
+                                
+                                <a asp-action="Edit" asp-route-id="@Model.ReservaId" class="btn btn-warning me-2">
+                                    <i class="bi bi-pencil me-2"></i>Editar
+                                </a>
+                                
+                                <form asp-action="Cancelar" asp-route-id="@Model.ReservaId" method="post" 
+                                      class="d-inline"
+                                      onsubmit="return confirm('¿Está seguro de cancelar esta reserva?');">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="bi bi-x-circle me-2"></i>Cancelar Reserva
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary" disabled>
+                                <i class="bi bi-ban me-2"></i>Reserva Cancelada
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,241 @@
+@model SistemaFanclub.Models.Idol
+
+@{
+    ViewData["Title"] = "Detalles del Idol";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Idols" asp-action="Index">Idols</a></li>
+            <li class="breadcrumb-item active">@Model.NombreArtistico</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.FotoURL))
+            {
+                <div class="card shadow-sm mb-4">
+                    <img src="@Model.FotoURL" class="card-img-top" alt="@Model.NombreArtistico" 
+                         style="max-height: 400px; object-fit: cover;" 
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%239333ea%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2264%22 fill=%22white%22%3E★%3C/text%3E%3C/svg%3E';" />
+                </div>
+            }
+            else
+            {
+                <div class="card shadow-sm mb-4">
+                    <div style="height: 400px; background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-star-fill text-white" style="font-size: 8rem;"></i>
+                    </div>
+                </div>
+            }
+
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    @if (Model.Activo)
+                    {
+                        <span class="badge bg-success mb-3" style="font-size: 1rem;">
+                            <i class="bi bi-check-circle me-1"></i>Activo
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary mb-3" style="font-size: 1rem;">
+                            <i class="bi bi-x-circle me-1"></i>Inactivo
+                        </span>
+                    }
+
+                    <div class="d-grid gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.IdolId" class="btn btn-warning">
+                            <i class="bi bi-pencil me-2"></i>Editar
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.IdolId" class="btn btn-danger">
+                            <i class="bi bi-trash me-2"></i>Eliminar
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>Volver a la lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white;">
+                    <h3 class="mb-0">
+                        <i class="bi bi-star-fill me-2"></i>
+                        @Model.NombreArtistico
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h5>
+                                <i class="bi bi-person me-2"></i>Información Básica
+                            </h5>
+                            <dl class="row">
+                                <dt class="col-sm-5">Nombre Real:</dt>
+                                <dd class="col-sm-7">@Model.NombreReal</dd>
+
+                                <dt class="col-sm-5">Tipo:</dt>
+                                <dd class="col-sm-7">
+                                    <span class="badge" style="background-color: #9333ea;">@Model.TipoIdol</span>
+                                </dd>
+
+                                <dt class="col-sm-5">Fandom:</dt>
+                                <dd class="col-sm-7">
+                                    <i class="bi bi-heart-fill me-1" style="color: #ec4899;"></i>
+                                    @Model.Fandom
+                                </dd>
+
+                                <dt class="col-sm-5">País:</dt>
+                                <dd class="col-sm-7">
+                                    <i class="bi bi-flag me-1"></i>
+                                    @Model.Pais
+                                </dd>
+
+                                @if (!string.IsNullOrEmpty(Model.Genero))
+                                {
+                                    <dt class="col-sm-5">Género Musical:</dt>
+                                    <dd class="col-sm-7">
+                                        <i class="bi bi-music-note me-1"></i>
+                                        @Model.Genero
+                                    </dd>
+                                }
+                            </dl>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5>
+                                <i class="bi bi-building me-2"></i>Agencia y Carrera
+                            </h5>
+                            <dl class="row">
+                                @if (Model.Agencia != null)
+                                {
+                                    <dt class="col-sm-5">Agencia:</dt>
+                                    <dd class="col-sm-7">
+                                        <strong>@Model.Agencia.Nombre</strong><br/>
+                                        <small class="text-muted">@Model.Agencia.Pais</small>
+                                    </dd>
+                                }
+
+                                <dt class="col-sm-5">Fecha Debut:</dt>
+                                <dd class="col-sm-7">
+                                    <i class="bi bi-calendar-event me-1"></i>
+                                    @(Model.FechaDebut?.ToString("dd/MM/yyyy") ?? "N/A")
+                                </dd>
+
+                                <dt class="col-sm-5">Años Activos:</dt>
+<dd class="col-sm-7">
+                                    @if (Model.FechaDebut.HasValue)
+                                    {
+                                        var aniosActivos = DateTime.Now.Year - Model.FechaDebut.Value.Year;
+                                        @aniosActivos @(aniosActivos == 1 ? "año" : "años")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-5">Registrado:</dt>
+                                <dd class="col-sm-7">
+                                    <small class="text-muted">@Model.FechaRegistro.ToString("dd/MM/yyyy")</small>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Biografia))
+                    {
+                        <hr/>
+                        <h5>
+                            <i class="bi bi-info-circle me-2"></i>Biografía
+                        </h5>
+                        <p class="text-justify">@Model.Biografia</p>
+                    }
+                </div>
+            </div>
+
+            @if (Model.Eventos != null && Model.Eventos.Any())
+            {
+                <div class="card shadow-sm">
+                    <div class="card-header" style="background-color: #f8f9fa;">
+                        <h5 class="mb-0">
+                            <i class="bi bi-calendar-event me-2"></i>
+                            Eventos Asociados (@Model.Eventos.Count())
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Evento</th>
+                                        <th>Tipo</th>
+                                        <th>Zona</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var evento in Model.Eventos.OrderByDescending(e => e.FechaEvento))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <small>@evento.FechaEvento.ToString("dd/MM/yyyy")</small>
+                                            </td>
+                                            <td>
+                                                <strong>@evento.Titulo</strong>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">@evento.TipoEvento</span>
+                                            </td>
+                                            <td>
+                                                <small>@evento.Zona</small>
+                                            </td>
+                                            <td>
+                                                @switch (evento.Estado)
+                                                {
+                                                    case "Programado":
+                                                        <span class="badge bg-info">Programado</span>
+                                                        break;
+                                                    case "EnCurso":
+                                                        <span class="badge bg-warning">En Curso</span>
+                                                        break;
+                                                    case "Finalizado":
+                                                        <span class="badge bg-secondary">Finalizado</span>
+                                                        break;
+                                                    case "Cancelado":
+                                                        <span class="badge bg-danger">Cancelado</span>
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Eventos" asp-action="Details" asp-route-id="@evento.EventoId" 
+                                                   class="btn btn-sm btn-outline-info">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    No hay eventos asociados a este idol todavía.
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,188 @@
+@model SistemaFanclub.Models.Idol
+
+@{
+    ViewData["Title"] = "Editar Idol";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Idols" asp-action="Index">Idols</a></li>
+            <li class="breadcrumb-item active">Editar</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white;">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil me-2"></i>
+                        Editar Idol: @Model.NombreArtistico
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="IdolId" />
+                        <input type="hidden" asp-for="FechaRegistro" />
+                        
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <h5 class="mb-3"><i class="bi bi-info-circle me-2"></i>Información Básica</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NombreArtistico" class="form-label fw-bold">Nombre Artístico</label>
+                                <input asp-for="NombreArtistico" class="form-control" placeholder="Ej: BLACKPINK" />
+                                <span asp-validation-for="NombreArtistico" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NombreReal" class="form-label fw-bold">Nombre Real</label>
+                                <input asp-for="NombreReal" class="form-control" placeholder="Ej: Kim Jisoo" />
+                                <span asp-validation-for="NombreReal" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TipoIdol" class="form-label fw-bold">Tipo</label>
+                                <select asp-for="TipoIdol" class="form-select">
+                                    <option value="">-- Seleccionar Tipo --</option>
+                                    <option value="Grupo">Grupo</option>
+                                    <option value="Solista">Solista</option>
+                                    <option value="Subgrupo">Subgrupo</option>
+                                    <option value="Duo">Dúo</option>
+                                </select>
+                                <span asp-validation-for="TipoIdol" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Fandom" class="form-label fw-bold">Nombre del Fandom</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-heart-fill" style="color: #ec4899;"></i></span>
+                                    <input asp-for="Fandom" class="form-control" placeholder="Ej: BLINK" />
+                                </div>
+                                <span asp-validation-for="Fandom" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="bi bi-building me-2"></i>Agencia y Origen</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AgenciaId" class="form-label fw-bold">Agencia</label>
+                                <select asp-for="AgenciaId" class="form-select" asp-items="ViewBag.AgenciaId">
+                                    <option value="">-- Seleccionar Agencia --</option>
+                                </select>
+                                <span asp-validation-for="AgenciaId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Pais" class="form-label fw-bold">País de Origen</label>
+                                <select asp-for="Pais" class="form-select">
+                                    <option value="">-- Seleccionar País --</option>
+                                    <option value="Corea del Sur">Corea del Sur</option>
+                                    <option value="Japón">Japón</option>
+                                    <option value="China">China</option>
+                                    <option value="Tailandia">Tailandia</option>
+                                    <option value="Estados Unidos">Estados Unidos</option>
+                                    <option value="Filipinas">Filipinas</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Malasia">Malasia</option>
+                                    <option value="Singapur">Singapur</option>
+                                    <option value="Vietnam">Vietnam</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                                <span asp-validation-for="Pais" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FechaDebut" class="form-label fw-bold">Fecha de Debut</label>
+                            <input asp-for="FechaDebut" type="date" class="form-control" />
+                            <span asp-validation-for="FechaDebut" class="text-danger"></span>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="bi bi-music-note me-2"></i>Información Musical</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Genero" class="form-label fw-bold">Género Musical</label>
+                            <select asp-for="Genero" class="form-select">
+                                <option value="">-- Seleccionar Género --</option>
+                                <option value="K-Pop">K-Pop</option>
+                                <option value="J-Pop">J-Pop</option>
+                                <option value="C-Pop">C-Pop</option>
+                                <option value="Hip Hop">Hip Hop</option>
+                                <option value="R&B">R&B</option>
+                                <option value="Dance">Dance</option>
+                                <option value="Ballad">Ballad</option>
+                                <option value="Rock">Rock</option>
+                                <option value="EDM">EDM</option>
+                                <option value="Indie">Indie</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <span asp-validation-for="Genero" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Biografia" class="form-label fw-bold">Biografía</label>
+                            <textarea asp-for="Biografia" class="form-control" rows="4" 
+                                      placeholder="Historia del idol/grupo, logros, premios, etc."></textarea>
+                            <span asp-validation-for="Biografia" class="text-danger"></span>
+                        </div>
+
+                        <h5 class="mb-3 mt-4"><i class="bi bi-image me-2"></i>Imagen</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="FotoURL" class="form-label fw-bold">URL de Foto</label>
+                            <input asp-for="FotoURL" class="form-control" 
+                                   placeholder="https://ejemplo.com/foto.jpg" />
+                            <small class="form-text text-muted">URL de la imagen del idol o grupo</small>
+                            <span asp-validation-for="FotoURL" class="text-danger"></span>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.FotoURL))
+                        {
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Vista Previa:</label>
+                                <div>
+                                    <img src="@Model.FotoURL" alt="@Model.NombreArtistico" 
+                                         class="img-thumbnail" style="max-width: 200px; max-height: 200px;" 
+                                         onerror="this.style.display='none';" />
+                                </div>
+                            </div>
+                        }
+
+                        <h5 class="mb-3 mt-4"><i class="bi bi-toggle-on me-2"></i>Estado</h5>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input asp-for="Activo" class="form-check-input" type="checkbox" role="switch" />
+                                <label asp-for="Activo" class="form-check-label fw-bold">
+                                    Idol Activo
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Desmarcar si el idol/grupo ya no está activo o se disolvió</small>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Details" asp-route-id="@Model.IdolId" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary" 
+                                    style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); border: none;">
+                                <i class="bi bi-check-circle me-2"></i>Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,100 @@
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Asistencia a Eventos";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Reportes" asp-action="Index">Reportes</a></li>
+            <li class="breadcrumb-item active">Asistencia a Eventos</li>
+        </ol>
+    </nav>
+
+    <div class="mb-4">
+        <h2>
+            <i class="bi bi-calendar-check me-2" style="color: #9333ea;"></i>
+            Reporte de Asistencia a Eventos
+        </h2>
+        <p class="text-muted">Eventos pasados y sus estadísticas de asistencia</p>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead style="background-color: #f8f9fa;">
+                            <tr>
+                                <th>Evento</th>
+                                <th>Idol</th>
+                                <th>Fecha</th>
+                                <th class="text-center">Total Reservas</th>
+                                <th class="text-center">Asistieron</th>
+                                <th class="text-center">No Asistieron</th>
+                                <th class="text-center">% Asistencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@item.Evento.Titulo</strong><br/>
+                                        <small class="text-muted">@item.Evento.TipoEvento</small>
+                                    </td>
+                                    <td>
+                                        @if (item.Evento.Idol != null)
+                                        {
+                                            <span>@item.Evento.Idol.NombreArtistico</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Sin idol</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <small>@item.Evento.FechaEvento.ToString("dd/MM/yyyy")</small>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary">@item.TotalReservas</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-success">@item.Asistencias</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-danger">@item.Inasistencias</span>
+                                    </td>
+                                    <td class="text-center">
+                                        @{
+                                            var porcentaje = (double)item.PorcentajeAsistencia;
+                                            var colorClase = porcentaje >= 80 ? "success" : (porcentaje >= 50 ? "warning" : "danger");
+                                        }
+                                        <span class="badge bg-@colorClase">@porcentaje.ToString("F1")%</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center py-5">
+            <i class="bi bi-info-circle" style="font-size: 3rem; color: #3b82f6;"></i>
+            <h4 class="mt-3">No hay eventos finalizados</h4>
+            <p>Los eventos finalizados aparecerán aquí con sus estadísticas de asistencia.</p>
+        </div>
+    }
+
+    <div class="mt-3">
+        <a asp-action="Dashboard" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Volver al Dashboard
+        </a>
+    </div>
+</div>

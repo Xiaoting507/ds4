@@ -1,0 +1,188 @@
+@model IEnumerable<SistemaFanclub.Models.Miembro>
+
+@{
+    ViewData["Title"] = "Gestión de Miembros";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item active">Miembros</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>
+                <i class="bi bi-people me-2" style="color: #ec4899;"></i>
+                Gestión de Miembros
+            </h2>
+            <p class="text-muted mb-0">@Model.Count() miembros registrados</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary btn-lg" 
+           style="background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%); border: none;">
+            <i class="bi bi-person-plus me-2"></i>Registrar Miembro
+        </a>
+    </div>
+
+    <!-- Filtros de Búsqueda -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Buscar</label>
+                    <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" 
+                           class="form-control" placeholder="Buscar por nombre, apellido o email..." />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Estado</label>
+                    <select name="soloActivos" class="form-select">
+                        <option value="true" selected>Solo Activos</option>
+                        <option value="false">Todos</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-2"></i>Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de Miembros -->
+    @if (Model.Any())
+    {
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead style="background-color: #f8f9fa;">
+                            <tr>
+                                <th>Miembro</th>
+                                <th>Contacto</th>
+                                <th>Rol</th>
+                                <th>Idol Favorito</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var miembro in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@miembro.Nombre @miembro.Apellido</strong>
+                                        @if (miembro.Usuario != null)
+                                        {
+                                            <br/>
+                                            <small class="text-muted">
+                                                <i class="bi bi-person-check me-1"></i>Usuario: @miembro.Usuario.Email
+                                            </small>
+                                        }
+                                    </td>
+                                    <td>
+                                        <i class="bi bi-envelope me-1"></i>@miembro.Email<br/>
+                                        @if (!string.IsNullOrEmpty(miembro.Telefono))
+                                        {
+                                            <i class="bi bi-telephone me-1"></i>
+                                            <span>@miembro.Telefono</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge" style="background-color: #9333ea;">
+                                            @miembro.RolFanclub
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (miembro.IdolFavorito != null)
+                                        {
+                                            <i class="bi bi-star-fill me-1" style="color: #fbbf24;"></i>
+                                            <span>@miembro.IdolFavorito.NombreArtistico</span>
+                                            <br/>
+                                            <small class="text-muted">@miembro.IdolFavorito.Fandom</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Sin idol favorito</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <small>@miembro.FechaIngreso.ToString("dd/MM/yyyy")</small>
+                                    </td>
+                                    <td>
+                                        @if (miembro.Activo)
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-check-circle me-1"></i>Activo
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-x-circle me-1"></i>Inactivo
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Details" asp-route-id="@miembro.MiembroId" 
+                                               class="btn btn-outline-info" title="Ver Detalles">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@miembro.MiembroId" 
+                                               class="btn btn-outline-warning" title="Editar">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@miembro.MiembroId" 
+                                               class="btn btn-outline-danger" title="Eliminar">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas Rápidas -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-primary mb-0">@Model.Count(m => m.Activo)</h3>
+                        <small class="text-muted">Miembros Activos</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-success mb-0">@Model.Count(m => m.IdolFavoritoId != null)</h3>
+                        <small class="text-muted">Con Idol Favorito</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-info mb-0">@Model.Count(m => m.UsuarioId != null)</h3>
+                        <small class="text-muted">Con Usuario Asociado</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            No hay miembros registrados. <a asp-action="Create" class="alert-link">Registrar el primer miembro</a>
+        </div>
+    }
+</div>
